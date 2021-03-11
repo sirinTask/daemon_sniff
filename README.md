@@ -41,26 +41,46 @@ Consider the basic flow to test the programm with a following command sequence:
 1) Make project via 
   make all
 2) Run daemon via 
-  sudo ./daemon_tmpl --cmd_pipe Sniffer
+  
+       sudo ./daemon_tmpl --cmd_pipe Sniffer
+
 3) Check initialization success via 
-  ps -o ppid,pid,sid,tty,cmd -C daemon_tmpl
+
+       ps -o ppid,pid,sid,tty,cmd -C daemon_tmpl
+
 4) Open another terminal and set up displaying output via 
-  tail -f /log.txt
+  
+       tail -f /log.txt
+
 5) Request help string form daemon via
-  echo '--h'> Sniffer &
+  
+       echo '--h'> Sniffer &
+
 6) Start sniffing on default interface via
-  echo '--start'> Sniffer &
+  
+       echo '--start'> Sniffer &
+
 7) Pause sniffing anytime via
-  echo '--stop'> Sniffer &
+
+       echo '--stop'> Sniffer &
+
 8) Request info on # of captured packets (persistent through reboots) via
-  echo '--stat'> Sniffer &
+
+       echo '--stat'> Sniffer &
+
 9) Request list of interactions and it`s packet  statistics via
-  echo '--list'> Sniffer & 
+ 
+       echo '--list'> Sniffer & 
+
 10) Request number of captured packets from specified ip
-  echo '--show_ip_count 192.168.0.1' > Sniffer &  
+       
+              echo '--show_ip_count 192.168.0.1' > Sniffer &  
+
 12) Switch sniffing interface via (Note! user must pause the sniffing before execution - othervise daemon will ignore switch command)
-echo '--stop'> Sniffer &
-echo '--select_iface 3' 	    > Sniffer &
+
+              echo '--stop'> Sniffer &
+              echo '--select_iface 3'> Sniffer &
+
 13) After switch is made, daemon considers that new sniff session started and clears the content of ip statistic storage. But omits clearing the global stats of # of captured packets (persistent through sessions and reboots)
 14) execute commands in any sequence, exept switching interface must be preempted with --stop cmd
 
